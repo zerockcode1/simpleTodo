@@ -34,4 +34,12 @@ public class Todo {
     @LastModifiedDate
     @Column(name ="moddate")
     private LocalDateTime modDate;
+
+    public void changeTitle(String title){
+        this.title = title;
+    }
+
+    public void changeContent(String content){
+        this.content = content;
+    }
 }
