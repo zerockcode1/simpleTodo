@@ -24,6 +24,12 @@ public class TodoController {
     @GetMapping("/now")
     public ResponseEntity<LocalDateTime> getNow() {
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return new ResponseEntity<>(LocalDateTime.now(), HttpStatus.OK);
     }
 
