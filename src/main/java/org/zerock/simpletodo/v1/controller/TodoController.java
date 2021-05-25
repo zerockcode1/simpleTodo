@@ -36,13 +36,15 @@ public class TodoController {
     @PostMapping("")
     public ResponseEntity<Long> register(@RequestBody TodoDTO todoDTO){
 
+        log.info("post........................" + todoDTO);
+
         Long tno  = service.register(todoDTO );
 
         return new ResponseEntity<>(tno, HttpStatus.OK);
     }
 
     @GetMapping("/{tno}")
-    public ResponseEntity<TodoDTO> register(@PathVariable("tno") Long tno){
+    public ResponseEntity<TodoDTO> read(@PathVariable("tno") Long tno){
 
         TodoDTO todoDTO = service.get(tno);
 
@@ -52,6 +54,8 @@ public class TodoController {
     @DeleteMapping("/{tno}")
     public ResponseEntity<String> remove(@RequestBody TodoDTO todoDTO) {
 
+        log.info("delete..............." + todoDTO);
+
         service.remove(todoDTO.getTno());
 
         return new ResponseEntity<>("success" , HttpStatus.OK);
@@ -59,6 +63,8 @@ public class TodoController {
 
     @PutMapping("/{tno}")
     public ResponseEntity<String> modify(@PathVariable Long tno, @RequestBody TodoDTO todoDTO){
+
+        log.info("modify.........." + todoDTO);
 
         service.modify(todoDTO);
 
