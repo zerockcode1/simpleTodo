@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.zerock.simpletodo.v1.dto.PageRequestDTO;
 import org.zerock.simpletodo.v1.dto.PageResultDTO;
 import org.zerock.simpletodo.v1.dto.TodoDTO;
 import org.zerock.simpletodo.v1.entity.Todo;
@@ -77,6 +78,25 @@ public class TodoRepositoryTests {
         Page<Todo> result = repository.findAll(pageable);
 
         result.get().forEach(todo -> log.info(todo));
+    }
+
+    /////////////////////////////////////////Search Querydsl
+
+    @Test
+    public void testSearch1() {
+
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+
+        Page<Todo> result = repository.searchPage(pageRequestDTO);
+
+        result.get().forEach(todo -> {
+            log.info(todo);
+        });
+
     }
 }
 

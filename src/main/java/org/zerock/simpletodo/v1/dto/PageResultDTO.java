@@ -32,7 +32,24 @@ public class PageResultDTO<DTO, EN> {
     //페이지 번호  목록
     private List<Integer> pageList;
 
+    //검색조건
+    private String type;
+    //검색 키워드
+    private String keyword;
+
     public PageResultDTO(Page<EN> result, Function<EN,DTO> fn ){
+
+        dtoList = result.stream().map(fn).collect(Collectors.toList());
+
+        totalPage = result.getTotalPages();
+
+        makePageList(result.getPageable());
+    }
+
+    public PageResultDTO(Page<EN> result, Function<EN,DTO> fn, PageRequestDTO pageRequestDTO ){
+
+        this.type = pageRequestDTO.getType();
+        this.keyword = pageRequestDTO.getKeyword();
 
         dtoList = result.stream().map(fn).collect(Collectors.toList());
 

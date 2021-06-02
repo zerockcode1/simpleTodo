@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.zerock.simpletodo.v1.dto.PageRequestDTO;
 import org.zerock.simpletodo.v1.dto.PageResultDTO;
 import org.zerock.simpletodo.v1.dto.TodoDTO;
 import org.zerock.simpletodo.v1.entity.Todo;
@@ -61,15 +62,25 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public PageResultDTO<TodoDTO, Todo> getPageList(int page) {
+    public PageResultDTO<TodoDTO, Todo> getPageList(PageRequestDTO pageRequestDTO) {
 
-        Pageable pageable =
-                PageRequest.of( (page<=0 ? 0 : page) -1, 10, Sort.by("tno").descending());
-
-        Page<Todo> result = repository.findAll(pageable);
+        Page<Todo> result = repository.searchPage(pageRequestDTO);
 
         Function<Todo, TodoDTO> fn = (en -> entityToDTO(en));
 
-        return new PageResultDTO<>(result, fn);
+        return new PageResultDTO<>(result, fn, pageRequestDTO);
     }
+
+//    @Override
+//    public PageResultDTO<TodoDTO, Todo> getPageList(int page) {
+//
+//        Pageable pageable =
+//                PageRequest.of( (page<=0 ? 0 : page) -1, 10, Sort.by("tno").descending());
+//
+//        Page<Todo> result = repository.findAll(pageable);
+//
+//        Function<Todo, TodoDTO> fn = (en -> entityToDTO(en));
+//
+//        return new PageResultDTO<>(result, fn);
+//    }
 }

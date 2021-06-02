@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.zerock.simpletodo.v1.dto.PageRequestDTO;
 import org.zerock.simpletodo.v1.dto.PageResultDTO;
 import org.zerock.simpletodo.v1.dto.TodoDTO;
 import org.zerock.simpletodo.v1.entity.Todo;
@@ -73,9 +74,10 @@ public class TodoController {
     }
 
     @GetMapping("/pages")
-    public ResponseEntity<PageResultDTO<TodoDTO,Todo>> getList(int page){
+    public ResponseEntity<PageResultDTO<TodoDTO,Todo>> getList(PageRequestDTO pageRequestDTO){
 
-        return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
+        log.info("getList" + pageRequestDTO);
+
+        return new ResponseEntity<>(service.getPageList(pageRequestDTO), HttpStatus.OK);
     }
-
 }

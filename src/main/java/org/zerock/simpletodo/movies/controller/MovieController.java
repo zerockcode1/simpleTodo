@@ -3,6 +3,7 @@ package org.zerock.simpletodo.movies.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.simpletodo.movies.service.MovieRankService;
@@ -10,6 +11,7 @@ import org.zerock.simpletodo.movies.service.MovieRankService;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"*"})
 public class MovieController {
 
     private final MovieRankService movieRankService;

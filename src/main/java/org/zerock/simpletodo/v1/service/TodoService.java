@@ -1,5 +1,6 @@
 package org.zerock.simpletodo.v1.service;
 
+import org.zerock.simpletodo.v1.dto.PageRequestDTO;
 import org.zerock.simpletodo.v1.dto.PageResultDTO;
 import org.zerock.simpletodo.v1.dto.TodoDTO;
 import org.zerock.simpletodo.v1.entity.Todo;
@@ -16,7 +17,9 @@ public interface TodoService {
 
     void remove(Long tno);
 
-    PageResultDTO<TodoDTO, Todo> getPageList(int page);
+    //PageResultDTO<TodoDTO, Todo> getPageList(int page);
+
+    PageResultDTO<TodoDTO, Todo> getPageList(PageRequestDTO pageRequestDTO);
 
 
     default Todo dtoToEntity(TodoDTO dto){
