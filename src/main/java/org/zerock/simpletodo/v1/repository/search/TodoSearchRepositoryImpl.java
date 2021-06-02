@@ -1,7 +1,10 @@
 package org.zerock.simpletodo.v1.repository.search;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -65,6 +68,18 @@ public class TodoSearchRepositoryImpl extends QuerydslRepositorySupport implemen
         query.where(booleanBuilder);
         query.offset(pageable.getOffset());
         query.limit(pageable.getPageSize());
+
+        //tuple.orderBy(board.bno.desc());
+
+        sort.stream().forEach(order -> {
+            Order direction = order.isAscending()? Order.ASC: Order.DESC;
+            String prop = order.getProperty();
+
+            PathBuilder orderByExpression = new PathBuilder(Todo.class, "tno");
+            query.orderBy(new OrderSpecifier(direction, orderByExpression.get(prop)));
+
+        });
+
 
         log.info(query);
 
