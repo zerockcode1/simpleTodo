@@ -36,6 +36,12 @@ public class TodoController {
     @PostMapping("")
     public ResponseEntity<Long> register(@RequestBody TodoDTO todoDTO){
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         log.info("post........................" + todoDTO);
 
         Long tno  = service.register(todoDTO );
@@ -46,6 +52,12 @@ public class TodoController {
     @GetMapping("/{tno}")
     public ResponseEntity<TodoDTO> read(@PathVariable("tno") Long tno){
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         TodoDTO todoDTO = service.get(tno);
 
         return new ResponseEntity<>(todoDTO , HttpStatus.OK);
@@ -53,6 +65,12 @@ public class TodoController {
 
     @DeleteMapping("/{tno}")
     public ResponseEntity<String> remove(@RequestBody TodoDTO todoDTO) {
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         log.info("delete..............." + todoDTO);
 
@@ -64,7 +82,14 @@ public class TodoController {
     @PutMapping("/{tno}")
     public ResponseEntity<String> modify(@PathVariable Long tno, @RequestBody TodoDTO todoDTO){
 
+
         log.info("modify.........." + todoDTO);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         service.modify(todoDTO);
 
@@ -74,6 +99,12 @@ public class TodoController {
 
     @GetMapping("/pages")
     public ResponseEntity<PageResultDTO<TodoDTO,Todo>> getList(int page){
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
     }
